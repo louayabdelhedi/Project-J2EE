@@ -1,13 +1,41 @@
-package jeeproject.model.bean;
+package jeeproject.bean;
 
-public class Employe {
+import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "employe")
+public class Employe implements Serializable{
+
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idEmploye")
 	private int idEmploye;
+	
+	@Column(name = "nomEmploye")
 	private String nomEmploye;
+	
+	@Column(name = "prenomEmploye")
 	private String prenomEmploye;
+	
+	@Column(name = "adresseEmploye")
 	private String adresseEmploye;
+	
+	@Column(name = "cinEmploye")
 	private int cinEmploye;
+	
+	@Column(name = "loginEmploye")
 	private String loginEmploye;
+	
+	@Column(name = "mpEmploye")
 	private String mpEmploye;
 	
 	public Employe(){

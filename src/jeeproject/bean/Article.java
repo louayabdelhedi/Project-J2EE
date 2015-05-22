@@ -1,22 +1,52 @@
-package jeeproject.model.bean;
+package jeeproject.bean;
 
 import java.awt.geom.Arc2D;
+import java.io.Serializable;
 
-public class Article {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "article")
+public class Article implements Serializable {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idArticle")
 	private int idArticle;
+
+	@Column(name = "libelleArticle")
 	private String libelleArticle;
+
+	@Column(name = "referenceArticle")
 	private int referenceArticle;
+
+	@Column(name = "prixHtArticle")
 	private float prixHtArticle;
+
+	@Column(name = "tvaArticle")
 	private float tvaArticle;
+
+	@Column(name = "quantiteArticle")
 	private int quantiteArticle;
+
+	@ManyToOne
+    @JoinColumn(name="idFamille")
+	private int idFamille;
 
 	public Article() {
 
 	}
 
 	public Article(int idArticle, String libelleArticle, int referenceArticle,
-			float prixHtArticle, float tvaArticle, int quantiteArticle) {
+			float prixHtArticle, float tvaArticle, int quantiteArticle,
+			int idFamille) {
 		super();
 		this.idArticle = idArticle;
 		this.libelleArticle = libelleArticle;
@@ -24,6 +54,7 @@ public class Article {
 		this.prixHtArticle = prixHtArticle;
 		this.tvaArticle = tvaArticle;
 		this.quantiteArticle = quantiteArticle;
+		this.idFamille = idFamille;
 	}
 
 	public int getIdArticle() {
@@ -72,6 +103,14 @@ public class Article {
 
 	public void setQuantiteArticle(int quantiteArticle) {
 		this.quantiteArticle = quantiteArticle;
+	}
+
+	public int getIdFamille() {
+		return idFamille;
+	}
+
+	public void setIdFamille(int idFamille) {
+		this.idFamille = idFamille;
 	}
 
 }

@@ -1,11 +1,33 @@
-package jeeproject.model.bean;
+package jeeproject.bean;
 
-public class Client {
+import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "client")
+public class Client implements Serializable{
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idClient")
 	private int idClient;
+	
+	@Column(name = "nomClient")
 	private String nomClient;
+	
+	@Column(name = "adresseClient")
 	private String adresseClient;
+	
+	@Column(name = "villeClient")
 	private String villeClient;
+	
+	@Column(name = "telClient")
 	private int telClient;
 	
 	public Client(){

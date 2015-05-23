@@ -1,5 +1,6 @@
 package jeeproject.bean;
 
+import java.awt.geom.Arc2D;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
@@ -28,23 +29,23 @@ public class LigneCommande implements Serializable{
 	
 	@ManyToOne
     @JoinColumn(name="idArticle")
-	private int idArticle;
+	private Article article;
 	
 	@ManyToOne
     @JoinColumn(name="numCommande")
-	private int numCommande;
+	private Commande commande;
 
 	public LigneCommande() {
 
 	}
 
-	public LigneCommande(int numLigne, int quantiteCommande, int idArticle,
-			int numCommande) {
+	public LigneCommande(int numLigne, int quantiteCommande, Article article,
+			Commande commande) {
 		super();
 		this.numLigne = numLigne;
 		this.quantiteCommande = quantiteCommande;
-		this.idArticle = idArticle;
-		this.numCommande = numCommande;
+		this.article = article;
+		this.commande = commande;
 	}
 
 	public int getNumLigne() {
@@ -63,20 +64,20 @@ public class LigneCommande implements Serializable{
 		this.quantiteCommande = quantiteCommande;
 	}
 
-	public int getIdArticle() {
-		return idArticle;
+	public Article getArticle() {
+		return article;
 	}
 
-	public void setIdArticle(int idArticle) {
-		this.idArticle = idArticle;
+	public void setArticle(Article article) {
+		this.article = article;
 	}
 
-	public int getNumCommande() {
-		return numCommande;
+	public Commande getCommande() {
+		return commande;
 	}
 
-	public void setNumCommande(int numCommande) {
-		this.numCommande = numCommande;
+	public void setCommande(Commande commande) {
+		this.commande = commande;
 	}
 
 }

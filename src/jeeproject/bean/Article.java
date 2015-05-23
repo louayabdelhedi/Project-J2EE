@@ -2,6 +2,7 @@ package jeeproject.bean;
 
 import java.awt.geom.Arc2D;
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -36,17 +38,23 @@ public class Article implements Serializable {
 	@Column(name = "quantiteArticle")
 	private int quantiteArticle;
 
+	
 	@ManyToOne
     @JoinColumn(name="idFamille")
-	private int idFamille;
-
+	private FamilleArticle familleArticle;
+	
+	@OneToMany(mappedBy = "article")
+	private List<LigneCommande> ligneCommandes;
+	
+	
+	
 	public Article() {
 
 	}
 
 	public Article(int idArticle, String libelleArticle, int referenceArticle,
 			float prixHtArticle, float tvaArticle, int quantiteArticle,
-			int idFamille) {
+			FamilleArticle familleArticle) {
 		super();
 		this.idArticle = idArticle;
 		this.libelleArticle = libelleArticle;
@@ -54,7 +62,7 @@ public class Article implements Serializable {
 		this.prixHtArticle = prixHtArticle;
 		this.tvaArticle = tvaArticle;
 		this.quantiteArticle = quantiteArticle;
-		this.idFamille = idFamille;
+		this.familleArticle = familleArticle;
 	}
 
 	public int getIdArticle() {
@@ -105,12 +113,12 @@ public class Article implements Serializable {
 		this.quantiteArticle = quantiteArticle;
 	}
 
-	public int getIdFamille() {
-		return idFamille;
+	public FamilleArticle getFamilleArticle() {
+		return familleArticle;
 	}
 
-	public void setIdFamille(int idFamille) {
-		this.idFamille = idFamille;
+	public void setFamilleArticle(FamilleArticle familleArticle) {
+		this.familleArticle = familleArticle;
 	}
 
 }

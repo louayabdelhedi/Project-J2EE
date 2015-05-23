@@ -12,5 +12,11 @@
  <property name="show_sql">true</property>
  <!-- <mapping resource="User.hbm.xml"></mapping> -->
  <mapping class="jeeproject.bean.Client"></mapping>
+ <mapping class="jeeproject.bean.FamilleArticle"></mapping>
+ <mapping class="jeeproject.bean.Article"></mapping>
+ <mapping class="jeeproject.bean.Commande"></mapping>
+ <mapping class="jeeproject.bean.LigneCommande"></mapping>
+ <mapping class="jeeproject.bean.Employe"></mapping>
+ <mapping class="jeeproject.bean.Facture"></mapping>
 </session-factory>
 </hibernate-configuration>

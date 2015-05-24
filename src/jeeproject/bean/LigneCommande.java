@@ -14,25 +14,24 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "ligneCommande")
-public class LigneCommande implements Serializable{
+public class LigneCommande implements Serializable, Bean {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "numLigne")
 	private int numLigne;
-	
+
 	@Column(name = "quantiteCommande")
 	private int quantiteCommande;
-	
+
 	@ManyToOne
-    @JoinColumn(name="idArticle")
+	@JoinColumn(name = "idArticle")
 	private Article article;
-	
+
 	@ManyToOne
-    @JoinColumn(name="numCommande")
+	@JoinColumn(name = "numCommande")
 	private Commande commande;
 
 	public LigneCommande() {

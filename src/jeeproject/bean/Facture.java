@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "facture")
-public class Facture implements Serializable {
+public class Facture implements Serializable, Bean {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -74,12 +74,12 @@ public class Facture implements Serializable {
 		this.montant = montant;
 	}
 
-	 public Commande getNumCommande() {
-	 return commande;
-	 }
-	
-	 public void setCommande(Commande commande) {
-	 this.commande = commande;
-	 }
+	public Commande getNumCommande() {
+		return commande;
+	}
+
+	public void setCommande(Commande commande) {
+		this.commande = commande;
+	}
 
 }

@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "commande")
-public class Commande implements Serializable {
+public class Commande implements Serializable,Bean {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

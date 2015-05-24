@@ -1,6 +1,7 @@
 package test;
 
 import jeeproject.bean.*;
+import jeeproject.hibernate.dao.HibernateConnexion;
 import jeeproject.hibernate.dao.HibernateSessionManager;
 
 import java.awt.geom.Arc2D;
@@ -19,7 +20,10 @@ public class Run {
 		Session session = HibernateSessionManager.getSessionFactory()
 				.openSession();
 
-		session.beginTransaction();
+		//session.beginTransaction();
+		
+		HibernateConnexion connexion= new HibernateConnexion();
+		connexion.openHibernateConnexion();
 		/*Client client = new Client();
 
 		client.setNomClient("louay");
@@ -106,8 +110,9 @@ public class Run {
 		for (FamilleArticle famille1 : list) {
 			System.out.println(famille1.getNomFamille());
 		}
-		session.getTransaction().commit();
-		HibernateSessionManager.shutdown();
+		//session.getTransaction().commit();
+		///HibernateSessionManager.shutdown();
+		connexion.closeHibernateConnexion();
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import jeeproject.bean.Bean;
 
-public class FamilleArticleDao implements Dao{
+public class FamilleArticleDao extends Dao{
 
 	@Override
 	public boolean create(Bean bean) {
@@ -24,7 +24,7 @@ public class FamilleArticleDao implements Dao{
 		return false;
 	}
 
-	@Override
+	
 	public List<Bean> listAll(Bean bean) {
 		// TODO Auto-generated method stub
 		return null;

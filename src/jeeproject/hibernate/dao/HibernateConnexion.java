@@ -7,25 +7,32 @@ public class HibernateConnexion {
 
 	private Session session;
 
-	// private Transaction transaction;
+	private Transaction transaction;
 
 	public HibernateConnexion() {
 	}
 
-	public Session openHibernateConnexion() {
+	public void openHibernateConnexion() {
 
 		session = HibernateSessionManager.getSessionFactory().openSession();
-		session.beginTransaction();
-		return session;
+		//transaction=session.beginTransaction();
+		
 
 	}
 
-	public Session closeHibernateConnexion() {
+	public void closeHibernateConnexion() {
 
-		session.getTransaction().commit();
+		//session.getTransaction().commit();
 		HibernateSessionManager.shutdown();
-		return session;
+		
 
 	}
+
+	public Session getSession() {
+		return session;
+	}
+
+	
+	
 
 }

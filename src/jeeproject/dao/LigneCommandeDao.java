@@ -4,7 +4,7 @@ import java.util.List;
 
 import jeeproject.bean.Bean;
 
-public class LigneCommandeDao implements Dao{
+public class LigneCommandeDao extends Dao{
 
 	@Override
 	public boolean create(Bean bean) {
@@ -24,7 +24,7 @@ public class LigneCommandeDao implements Dao{
 		return false;
 	}
 
-	@Override
+	
 	public List<Bean> listAll(Bean bean) {
 		// TODO Auto-generated method stub
 		return null;

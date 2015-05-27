@@ -30,8 +30,8 @@ public class EmployeDao extends Dao{
 		return null;
 	}
 
-	@Override
-	public Bean read(int id) {
+	
+	public Bean read(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

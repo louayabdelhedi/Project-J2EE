@@ -15,10 +15,6 @@ import javax.persistence.Table;
 public class Employe implements Serializable,Bean{
 
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idEmploye")
-	private int idEmploye;
 	
 	@Column(name = "nomEmploye")
 	private String nomEmploye;
@@ -32,6 +28,7 @@ public class Employe implements Serializable,Bean{
 	@Column(name = "cinEmploye")
 	private int cinEmploye;
 	
+	@Id
 	@Column(name = "loginEmploye")
 	private String loginEmploye;
 	
@@ -43,25 +40,16 @@ public class Employe implements Serializable,Bean{
 		
 	}
 
-	public Employe(int idEmploye, String nomEmploye, String prenomEmploye,
+	public Employe(String nomEmploye, String prenomEmploye,
 			String adresseEmploye, int cinEmploye, String loginEmploye,
 			String mpEmploye) {
 		super();
-		this.idEmploye = idEmploye;
 		this.nomEmploye = nomEmploye;
 		this.prenomEmploye = prenomEmploye;
 		this.adresseEmploye = adresseEmploye;
 		this.cinEmploye = cinEmploye;
 		this.loginEmploye = loginEmploye;
 		this.mpEmploye = mpEmploye;
-	}
-
-	public int getIdEmploye() {
-		return idEmploye;
-	}
-
-	public void setIdEmploye(int idEmploye) {
-		this.idEmploye = idEmploye;
 	}
 
 	public String getNomEmploye() {

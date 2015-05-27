@@ -88,6 +88,7 @@ public class Employe implements Serializable,Bean{
 		return loginEmploye;
 	}
 
+	
 	public void setLoginEmploye(String loginEmploye) {
 		this.loginEmploye = loginEmploye;
 	}

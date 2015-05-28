@@ -153,6 +153,8 @@ public class EmployeDao extends Dao {
 			e.printStackTrace();
 		}
 		return md5;
+		
+		
 	}
 
 }

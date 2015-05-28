@@ -21,10 +21,10 @@ public abstract class Dao {
 	public boolean delete(Bean bean) {
 		return false;
 	}
-	public List<Article> listAll() {
+	public List<Bean> listAll() {
 		return null;
 	}
-	public Bean read(int id) {
+	public Bean search(int id) {
 		return null;
 	}
 	

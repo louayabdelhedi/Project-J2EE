@@ -129,6 +129,16 @@ public class EmployeDao extends Dao {
 		return employe;
 
 	}
+	
+	public Bean search(String login) {
+		Query query = session
+				.createQuery("from Employe where loginEmploye=:ref");
+		query.setString("ref", login);
+		Bean employe = (Bean) query.list().get(0);
+
+		return employe;
+
+	}
 
 	public static String md5(String input) {
 

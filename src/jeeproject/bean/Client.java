@@ -32,6 +32,12 @@ public class Client implements Serializable,Bean{
 	@Column(name = "telClient")
 	private int telClient;
 	
+	@Column(name = "prenomClient")
+	private String prenomClient;
+	
+	@Column(name = "cinClient")
+	private int cinClient;
+	
 	
 	@OneToMany(mappedBy = "client")
 	private List<Commande> commandes;
@@ -40,13 +46,15 @@ public class Client implements Serializable,Bean{
 	}
 
 	public Client(int idClient, String nomClient, String adresseClient,
-			String villeClient, int telClient) {
+			String villeClient, int telClient,String prenomClient,int cinClient) {
 		super();
 		this.idClient = idClient;
 		this.nomClient = nomClient;
 		this.adresseClient = adresseClient;
 		this.villeClient = villeClient;
 		this.telClient = telClient;
+		this.prenomClient=prenomClient;
+		this.cinClient=cinClient;
 	}
 
 	public int getIdClient() {
@@ -87,6 +95,30 @@ public class Client implements Serializable,Bean{
 
 	public void setTelClient(int telClient) {
 		this.telClient = telClient;
+	}
+
+	public String getPrenomClient() {
+		return prenomClient;
+	}
+
+	public void setPrenomClient(String prenomClient) {
+		this.prenomClient = prenomClient;
+	}
+
+	public int getCinClient() {
+		return cinClient;
+	}
+
+	public void setCinClient(int cinClient) {
+		this.cinClient = cinClient;
+	}
+
+	public List<Commande> getCommandes() {
+		return commandes;
+	}
+
+	public void setCommandes(List<Commande> commandes) {
+		this.commandes = commandes;
 	}
 	
 	

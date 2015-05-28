@@ -25,92 +25,107 @@ public class ArticleDao extends Dao {
 
 	}
 
-	public boolean create(Article article) {
+	@Override
+	public boolean create(Bean bean) {
+
+		try {
+			transaction = session.beginTransaction();
+			session.save(bean);
+
+			transaction.commit();
+
+		} catch (RuntimeException exc) {
+			if (transaction != null)
+				transaction.rollback();
+			exc.printStackTrace();
+			return false;
+		} finally {
+			session.flush();
+		}
+		return true;
+	}
+
+	@Override
+	public boolean update(Bean bean) {
+
+		Article article = (Article) bean;
+		Query query = session
+				.createQuery(" from Article where referenceArticle=:ref");
+		query.setInteger("ref", article.getReferenceArticle());
+		Iterator articles = query.iterate();
+
 		
+		Article articleToUpdate = (Article) articles.next();
+		
+		articleToUpdate = (Article) session.get(Article.class,
+				articleToUpdate.getIdArticle());
+		System.out.println("Nom articleeee=>>>>>"
+				+ articleToUpdate.getLibelleArticle());
+
+		articleToUpdate.setLibelleArticle(article.getLibelleArticle());
+		articleToUpdate.setReferenceArticle(article.getReferenceArticle());
+		articleToUpdate.setPrixHtArticle(article.getPrixHtArticle());
+		articleToUpdate.setTvaArticle(article.getTvaArticle());
+		articleToUpdate.setQuantiteArticle(article.getQuantiteArticle());
+		articleToUpdate.setFamilleArticle(article.getFamilleArticle());
 		try {
 			transaction = session.beginTransaction();
-			session.save(article);
-
+			session.update(articleToUpdate);
 			transaction.commit();
-			
 		} catch (RuntimeException exc) {
-			
+			if (transaction != null)
+				transaction.rollback();
 			exc.printStackTrace();
 			return false;
+		} finally {
+			session.flush();
 		}
 		return true;
+
 	}
 
-	public boolean update(String libelleArticle, int referenceArticle,
-			float prixHtArticle, float tvaArticle, int quantiteArticle,
-			FamilleArticle familleArticle) {
+	@Override
+	public boolean delete(Bean bean) {
 
+		Article article = (Article) bean;
 		Query query = session
 				.createQuery(" from Article where referenceArticle=:ref");
-		query.setInteger("ref", referenceArticle);
+		query.setInteger("ref", article.getReferenceArticle());
 		Iterator articles = query.iterate();
+		Article articleToDelete = (Article) articles.next();
+		articleToDelete = (Article) session.get(Article.class,
+				articleToDelete.getIdArticle());
 
-		Article article = (Article) articles.next();
-		article = (Article) session.get(Article.class, article.getIdArticle());
-		System.out
-				.println("Nom articleeee=>>>>>" + article.getLibelleArticle());
-
-		article.setLibelleArticle(libelleArticle);
-		article.setReferenceArticle(referenceArticle);
-		article.setPrixHtArticle(prixHtArticle);
-		article.setTvaArticle(tvaArticle);
-		article.setQuantiteArticle(quantiteArticle);
-		article.setFamilleArticle(familleArticle);
 		try {
 			transaction = session.beginTransaction();
-			session.update(article);
+			session.delete(articleToDelete);
 			transaction.commit();
 		} catch (RuntimeException exc) {
-
+			if (transaction != null)
+				transaction.rollback();
 			exc.printStackTrace();
 			return false;
+		} finally {
+			session.flush();
 		}
 		return true;
 
 	}
 
-	public boolean delete(int referenceArticle) {
-
-		Query query = session
-				.createQuery(" from Article where referenceArticle=:ref");
-		query.setInteger("ref", referenceArticle);
-		Iterator articles = query.iterate();
-		Article article = (Article) articles.next();
-		article = (Article) session.get(Article.class, article.getIdArticle());
-
-		try {
-			transaction = session.beginTransaction();
-			session.delete(article);
-			transaction.commit();
-		} catch (RuntimeException exc) {
-
-			exc.printStackTrace();
-			return false;
-		}
-		return true;
-
-	}
-
-	public List<Article> listAll() {
+	@Override
+	public List<Bean> listAll() {
 
 		Query req = session.createQuery("from Article");
 
-		// req.setInteger(0, 7);
-		List<Article> articles = (List<Article>) req.list();
-//		for (Article article : articles) {
-//			System.out.println(article.getLibelleArticle());
-//		}
+		List<Bean> articles = (List<Bean>) req.list();
+
 		return articles;
 	}
 
-	public Bean read(int id) {
+	@Override
+	public Bean search(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return super.search(id);
 	}
 
 }

@@ -144,8 +144,8 @@ $("form#login .form-group:has(.form-control):first .form-control").focus();
 			 <script src="assets/js/joinable.js" id="script-resource-4"></script>
 			  <script src="assets/js/xenon-api.js" id="script-resource-5"></script>
 			   <script src="assets/js/xenon-toggles.js" id="script-resource-6"></script>
-			    <script src="assets/js/jquery-validate/jquery.validate.min.js" id="script-resource-7"></script>
-			     <script src="assets/js/toastr/toastr.min.js" id="script-resource-8"></script>
+			    <script src="assets/js/jquery.validate.min.js" id="script-resource-7"></script>
+			     <script src="assets/js/toastr.min.js" id="script-resource-8"></script>
 			     
 			      <script src="assets/js/xenon-custom.js" id="script-resource-9"></script> 
 			      

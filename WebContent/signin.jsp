@@ -32,20 +32,45 @@ setTimeout(function(){ $(".fade-in-effect").addClass('in'); }, 1);
 // Validation and Ajax action
 $("form#login").validate({
 rules: {
-username: {
+nomEmploye: {
 	required: true
 },
-passwd: {
+prenomEmploye: {
+	required: true
+},
+adresseEmploye: {
+	required: true
+},
+cinEmploye: {
+	required: true
+},
+loginEmploye: {
+	required: true
+},
+mpEmploye: {
 	required: true
 }
 },
 messages: {
-username: {
-	required: 'Please enter your username.'
+nomEmploye: {
+	required: 'Please enter your nomEmploye.'
 },
-passwd: {
-	required: 'Please enter your password.'
+prenomEmploye: {
+	required: 'Please enter your prenomEmploye.'
+},
+adresseEmploye: {
+	required: 'Please enter your adresseEmploye.'
+},
+cinEmploye: {
+	required: 'Please enter your cinEmploye.'
+},
+loginEmploye: {
+	required: 'Please enter your loginEmploye.'
+},
+mpEmploye: {
+	required: 'Please enter your mpEmploye.'
 }
+
 },
 
 submitHandler: function(form)
@@ -71,8 +96,12 @@ $.ajax({
 	dataType: 'json',
 data: {
 	do_login: true,
-	username: $(form).find('#username').val(),
-	passwd: $(form).find('#passwd').val(),
+	nomEmploye: $(form).find('#nomEmploye').val(),
+	prenomEmploye: $(form).find('#prenomEmploye').val(),
+	adresseEmploye: $(form).find('#adresseEmploye').val(),
+	cinEmploye: $(form).find('#cinEmploye').val(),
+	loginEmploye: $(form).find('#loginEmploye').val(),
+	mpEmploye: $(form).find('#mpEmploye').val(),
 },
 success: function(resp)
 {
@@ -88,7 +117,7 @@ if(resp.accessGranted)
 else
 {
 toastr.error("You have entered wrong password, please try again. User and password is <strong>demo/demo</strong> :)", "Invalid Login!", opts);
-$(form).find('#passwd').select();
+$(form).find('#mpEmploye').select();
 }
 }
 });
@@ -115,7 +144,7 @@ $("form#login .form-group:has(.form-control):first .form-control").focus();
    </div> 
    <div class="form-group"> 
    <label class="control-label" for="prenomEmploye">Prenom</label>
-    <input type="password" class="form-control input-dark" name="prenomEmploye" id="prenomEmploye" autocomplete="off" />
+    <input type="text" class="form-control input-dark" name="prenomEmploye" id="prenomEmploye" autocomplete="off" />
      </div> 
      <div class="form-group">
   <label class="control-label" for="adresseEmploye">Adresse</label>
@@ -123,7 +152,7 @@ $("form#login .form-group:has(.form-control):first .form-control").focus();
    </div> 
    <div class="form-group"> 
    <label class="control-label" for="cinEmploye">CIN</label>
-    <input type="password" class="form-control input-dark" name="cinEmploye" id="cinEmploye" autocomplete="off" />
+    <input type="text" class="form-control input-dark" name="cinEmploye" id="cinEmploye" autocomplete="off" />
      </div>
      <div class="form-group">
   <label class="control-label" for="loginEmploye">Login</label>
@@ -151,8 +180,8 @@ $("form#login .form-group:has(.form-control):first .form-control").focus();
 			 <script src="assets/js/joinable.js" id="script-resource-4"></script>
 			  <script src="assets/js/xenon-api.js" id="script-resource-5"></script>
 			   <script src="assets/js/xenon-toggles.js" id="script-resource-6"></script>
-			    <script src="assets/js/jquery-validate/jquery.validate.min.js" id="script-resource-7"></script>
-			     <script src="assets/js/toastr/toastr.min.js" id="script-resource-8"></script>
+			    <script src="assets/js/jquery.validate.min.js" id="script-resource-7"></script>
+			     <script src="assets/js/toastr.min.js" id="script-resource-8"></script>
 			     
 			      <script src="assets/js/xenon-custom.js" id="script-resource-9"></script> 
 			      

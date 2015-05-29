@@ -52,6 +52,11 @@ public class Employe implements Serializable,Bean{
 		this.mpEmploye = mpEmploye;
 	}
 
+	public Employe(String login, String mdp) {
+		this.loginEmploye = login;
+		this.mpEmploye = mdp;
+	}
+
 	public String getNomEmploye() {
 		return nomEmploye;
 	}

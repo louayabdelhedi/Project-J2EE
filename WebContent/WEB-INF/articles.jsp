@@ -1,3 +1,30 @@
+<%@ page import="jeeproject.bean.*"%>
+<%@ page import="jeeproject.hibernate.dao.*"%>
+<%@ page import="jeeproject.dao.*"%>
+<%@ page import="jeeproject.service.*"%>
+<%@ page import="java.util.List" %>
+<%@ page import="org.hibernate.Session" %>
+
+<% Employe employe = (Employe) request.getSession().getAttribute("employe");
+	System.out.println("employeeeee        "+employe);
+	if (employe == null) {
+		System.out.println("pas d'utilisateur");
+		response.sendRedirect("login");
+	} else {
+		HibernateConnexion hc = (HibernateConnexion) request.getSession().getAttribute("hc");
+		Session se = (Session) request.getSession().getAttribute("session");
+		System.out.println("session mrigla");
+		
+		System.out.println("hhhhhhhhhhcccccccccccc======> "+hc );
+		System.out.println("Sesssssssioooooooooonnnnnn======> "+se );
+		
+		EmployeDao ed = new EmployeDao(se);
+		ArticleDao artd = new ArticleDao(se);
+		
+		
+		System.out.println("logiiiiiiiiiiiiiiiiiiinn "+employe.getLoginEmploye());
+        Employe emp = (Employe)ed.search(employe.getLoginEmploye());%>
+       
 <!DOCTYPE html> <html lang="en"> 
 <!-- Mirrored from themes.laborator.co/xenon/blank/sidebar/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 May 2015 10:24:18 GMT -->
 <head> 
@@ -34,10 +61,10 @@
 									 </div>
 										<div class="user-details">
 										 <h3> 
-										 <a href="#">Krichen Bilel</a>
+										 <a href="#"><% out.write(emp.getNomEmploye()+" "+emp.getPrenomEmploye()); %></a>
 											<span class="user-status is-online"></span> 
 											</h3>
-											<p class="user-title">Commerciale</p> 
+											<p class="user-title"></p> 
 											<div class="user-links"> 
 											<a href="" class="btn btn-primary">Edit Profile</a> 
 											<a href="" class="btn btn-success">Upgrade</a> 
@@ -77,31 +104,31 @@
 										           </header>
 										    <ul id="main-menu" class="main-menu"> 
 										            <li> 
-																       <a href="employlees.jsp">
+																       <a href="Employe">
 																       <i class="linecons-cog"></i>
 																      	 <span class="title">Employées</span>
 																       </a>
 										            </li>
 										            <li> 
-										                    <a href="clients.jsp">
+										                    <a href="Client">
 										                    	<i class="linecons-desktop"></i>
 										                    	<span class="title">Clients</span>
 										                    </a> 
 										            </li>
 					           					  <li class="active"> 
-					           							  <a href="articles.jsp">
+					           							  <a href="Article">
 								           							  <i class="linecons-note"></i>
 								           							  <span class="title">Articles</span>
 					           							  </a> 
 					    								  </li>
 					                      <li>
-					                          <a href="famille_articles.jsp">
+					                          <a href="ArticleFamille">
 					                          			<i class="linecons-star"></i>
 					                           			<span class="title">Familles Articles</span>
 					                          </a>
 					                      </li>
 					                      <li> 
-					                          <a href="commandes.jsp">
+					                          <a href="Commande">
 							                          <i class="linecons-mail"></i>
 							                          <span class="title">Commandes</span>
 					                          </a> 
@@ -136,7 +163,7 @@
       <li class="dropdown user-profile">
        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
        <img src="assets/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" /> <span>
-Krichen Bilel
+<% out.write(emp.getNomEmploye()+" "+emp.getPrenomEmploye()); %>
 <i class="fa-angle-down"></i>
  </span>
   </a>
@@ -192,52 +219,59 @@ Logout
            	  <th>Reference</th>
            	  <th>Prix HTVA</th>
            	  <th>TVA</th> 
-           	  <th>Quantité</th>
+           	  <th>Quantit&egrave;</th>
            	  <th>Famille</th> 
            	  <th>Operations</th> 
            	  
            	</tr> 
            </thead>
-           <tbody> 
+           <tbody>
+            <%
+           List<Bean> arts = artd.listAll() ;
+           for(int i=0;i<arts.size();i++){
+           %> 
            	<tr>
            	 <td class="user-cb">
            	  <input type="checkbox" class="cbr" name="Articles-list[]" value="1" checked /> 
            	 </td>
            	 <td class="user-id">
-           	  <div name="idArticle" class="id">1</div> 
+           	  <div name="idArticle" class="id"><% out.write(((Article)arts.get(i)).getIdArticle()); %></div> 
           
            	 </td> 
            	 <td class="user-name">
-				<div name="libelleArticle" class="name">MotherBoard</div>
+				<div name="libelleArticle" class="name"><% out.write(((Article)arts.get(i)).getLibelleArticle()); %></div>
 			 </td> 
            	 <td class="hidden-xs hidden-sm">
-           	  <div name="referenceArticle" class="name">ND45448</div>
+           	  <div name="referenceArticle" class="name"><% out.write(String.valueOf(((Article)arts.get(i)).getReferenceArticle())); %></div>
            	 </td> 
            	 <td class="hidden-xs hidden-sm">
-           	  <div name="prixHtArticle" class="name">18 DT</div>
+           	  <div name="prixHtArticle" class="name"><% out.write(String.valueOf(((Article)arts.get(i)).getPrixHtArticle())); %></div>
            	 </td>
            	 <td class="user-id">
-           	  <div name="tvaArticle" class="id">18 %</div> 
+           	  <div name="tvaArticle" class="id"><% out.write(String.valueOf(((Article)arts.get(i)).getTvaArticle())); %></div> 
            	 </td> 
            	 <td class="user-id">
-           	  <div name="quantiteArticle" class="id">20</div>
+           	  <div name="quantiteArticle" class="id"><% out.write(String.valueOf(((Article)arts.get(i)).getQuantiteArticle())); %></div>
            	 </td>
            	 <td class="hidden-xs hidden-sm">
-           	  <div name="nomFamille" class="name">PC</div>
+           	  <div name="nomFamille" class="name"><% out.write(String.valueOf(((Article)arts.get(i)).getFamilleArticle().getNomFamille())); %></div>
            	 </td>
 
            	 
 			 <td class="action-links">
-			  <a href="#" class="edit"> 
+			  <form method="post">
+			  <button name="modifier_art" value="<%out.write(((Article)arts.get(i)).getIdArticle());%>" class="edit" type="submit"> 
 			  <i class="linecons-pencil"></i>
 				Edit 
-			  </a> 
-			  <a href="#" class="delete"> 
+			  </button> 
+			  <button name="supprimer_art" value="<%out.write(((Article)arts.get(i)).getIdArticle());%>" class="delete" type="submit"> 
 			  <i class="linecons-trash"></i>
 				Delete
-			  </a> 
+			  </button> 
+			  </form> 
 			 </td>
 			</tr> 
+			<% } %>
 		   </tbody> 
 		  </table> 
 		  <div class="row">
@@ -309,3 +343,6 @@ Logout
                </body> 
 <!-- Mirrored from themes.laborator.co/xenon/blank/sidebar/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 May 2015 10:24:18 GMT -->
 </html>
+<%
+	}
+%>

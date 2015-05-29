@@ -14,14 +14,11 @@ import jeeproject.hibernate.dao.HibernateConnexion;
 
 public class ClientDao extends Dao{
 
-	HibernateConnexion connexion;
-	Transaction transaction;
-	Session session;
+	
 
-	public ClientDao(HibernateConnexion connexion) {
+	public ClientDao(Session session) {
 
-		this.connexion = connexion;
-		session = connexion.getSession();
+		this.session = session;
 
 	}
 

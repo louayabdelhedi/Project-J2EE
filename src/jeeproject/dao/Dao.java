@@ -7,26 +7,35 @@ import org.hibernate.Transaction;
 
 import jeeproject.bean.Article;
 import jeeproject.bean.Bean;
+import jeeproject.hibernate.dao.HibernateConnexion;
 
 public abstract class Dao {
 	
-	Transaction trns=null;
-	Session session=null;
-	public boolean create(Bean bean) {
-		return false;
+	
+	Transaction transaction;
+	Session session;
+	
+	public  boolean create(Bean bean){
+		try {
+			transaction = session.beginTransaction();
+			session.save(bean);
+
+			transaction.commit();
+
+		} catch (RuntimeException exc) {
+			if (transaction != null)
+				transaction.rollback();
+			exc.printStackTrace();
+			return false;
+		} finally {
+			session.flush();
+		}
+		return true;
 	}
-	public boolean update(Bean bean) {
-		return false;
-	}
-	public boolean delete(Bean bean) {
-		return false;
-	}
-	public List<Bean> listAll() {
-		return null;
-	}
-	public Bean search(int id) {
-		return null;
-	}
+	public abstract boolean update(Bean bean);
+	public abstract boolean delete(Bean bean);
+	public  abstract List<Bean> listAll();
+	public abstract Bean search(int id);
 	
 	
 

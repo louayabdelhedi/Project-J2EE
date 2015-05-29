@@ -74,7 +74,7 @@ public class Facture implements Serializable, Bean {
 		this.montant = montant;
 	}
 
-	public Commande getNumCommande() {
+	public Commande getCommande() {
 		return commande;
 	}
 

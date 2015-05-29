@@ -21,8 +21,7 @@ public class HibernateConnexion {
 	}
 
 	public void closeHibernateConnexion() {
-
-		//session.getTransaction().commit();
+		//session.close();
 		HibernateSessionManager.shutdown();
 		
 

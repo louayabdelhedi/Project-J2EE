@@ -14,14 +14,11 @@ import jeeproject.hibernate.dao.HibernateConnexion;
 
 public class ArticleDao extends Dao {
 
-	HibernateConnexion connexion;
-	Transaction transaction;
-	Session session;
+	
 
-	public ArticleDao(HibernateConnexion connexion) {
+	public ArticleDao(Session session) {
 
-		this.connexion = connexion;
-		session = connexion.getSession();
+		this.session = session;
 
 	}
 
@@ -54,9 +51,8 @@ public class ArticleDao extends Dao {
 		query.setInteger("ref", article.getReferenceArticle());
 		Iterator articles = query.iterate();
 
-		
 		Article articleToUpdate = (Article) articles.next();
-		
+
 		articleToUpdate = (Article) session.get(Article.class,
 				articleToUpdate.getIdArticle());
 		System.out.println("Nom articleeee=>>>>>"
@@ -124,8 +120,13 @@ public class ArticleDao extends Dao {
 
 	@Override
 	public Bean search(int id) {
-		// TODO Auto-generated method stub
-		return super.search(id);
+		
+			Query query = session
+					.createQuery("from Article where referenceArticle=:ref");
+			query.setInteger("ref", id);
+			Bean article = (Bean) query.list().get(0);
+	
+			return article;
 	}
 
 }

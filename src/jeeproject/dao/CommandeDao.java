@@ -14,27 +14,11 @@ import jeeproject.hibernate.dao.HibernateConnexion;
 
 public class CommandeDao extends Dao {
 
-	HibernateConnexion connexion;
-	Transaction transaction;
-	Session session;
+	public CommandeDao(Session session) {
 
-	@Override
-	public boolean create(Bean bean) {
-		try {
-			transaction = session.beginTransaction();
-			session.save(bean);
+		this.session = session;
+		
 
-			transaction.commit();
-
-		} catch (RuntimeException exc) {
-			if (transaction != null)
-				transaction.rollback();
-			exc.printStackTrace();
-			return false;
-		} finally {
-			session.flush();
-		}
-		return true;
 	}
 
 	@Override
@@ -49,7 +33,7 @@ public class CommandeDao extends Dao {
 
 		commandeToUpdate = (Commande) session.get(Commande.class,
 				commandeToUpdate.getNumCommande());
-		System.out.println("Nom articleeee=>>>>>"
+		System.out.println("Nom Commande=>>>>>"
 				+ commandeToUpdate.getDateCommande());
 
 		commandeToUpdate.setClient(commande.getClient());
@@ -97,7 +81,8 @@ public class CommandeDao extends Dao {
 		return true;
 	}
 
-	public List<Bean> listAll(Bean bean) {
+	@Override
+	public List<Bean> listAll() {
 		Query req = session.createQuery("from Commande");
 
 		List<Bean> commandes = (List<Bean>) req.list();
@@ -107,8 +92,12 @@ public class CommandeDao extends Dao {
 
 	@Override
 	public Bean search(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = session
+				.createQuery("from Commande where numCommande=:ref");
+		query.setInteger("ref", id);
+		Bean commande = (Bean) query.list().get(0);
+
+		return commande;
 	}
 
 }

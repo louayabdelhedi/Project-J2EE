@@ -17,14 +17,13 @@ import jeeproject.hibernate.dao.HibernateConnexion;
 
 public class EmployeDao extends Dao {
 
-	HibernateConnexion connexion;
-	Transaction transaction;
-	Session session;
+	
+	
 
-	public EmployeDao(HibernateConnexion connexion) {
+	public EmployeDao(Session session) {
 
-		this.connexion = connexion;
-		session = connexion.getSession();
+		this.session = session;
+		
 
 	}
 
@@ -165,6 +164,12 @@ public class EmployeDao extends Dao {
 		return md5;
 		
 		
+	}
+
+	@Override
+	public Bean search(int id) {
+		
+		return null;
 	}
 
 }

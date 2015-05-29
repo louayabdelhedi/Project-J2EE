@@ -2,6 +2,13 @@ package test;
 
 import jeeproject.bean.*;
 import jeeproject.dao.ArticleDao;
+import jeeproject.dao.ClientDao;
+import jeeproject.dao.CommandeDao;
+import jeeproject.dao.Dao;
+import jeeproject.dao.EmployeDao;
+import jeeproject.dao.FactureDao;
+import jeeproject.dao.FamilleArticleDao;
+import jeeproject.dao.LigneCommandeDao;
 import jeeproject.hibernate.dao.HibernateConnexion;
 import jeeproject.hibernate.dao.HibernateSessionManager;
 
@@ -18,111 +25,85 @@ public class Run {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// Session session =
-		// HibernateSessionManager.getSessionFactory().openSession();
-		Session session = null;
 
-		// session.beginTransaction();
 		HibernateConnexion connexion = new HibernateConnexion();
 		connexion.openHibernateConnexion();
+		
+		Employe emp= new Employe();
+		emp.setAdresseEmploye("sfax");
+		emp.setCinEmploye(145);
+		emp.setLoginEmploye("bradai");
+		emp.setMpEmploye("louay");
+		emp.setNomEmploye("louay");
+		emp.setPrenomEmploye("abd");
+		
+	Client client= new Client();
+		client.setAdresseClient("sfax");
+	client.setCinClient(01555);
+	client.setNomClient("louaaaa");
+	client.setIdClient(22);
+		
+		Dao empDao= new EmployeDao(connexion.getSession());
+		//Employe emp1=(Employe) ((EmployeDao)empDao).search("bradai","louay");
+		Employe emp1=(Employe) ((EmployeDao)empDao).search("louay");
+		System.out.println(emp1.getLoginEmploye());
+		
+		Commande commande= new Commande();
+		commande.setClient(client);
+		commande.setDateCommande(new Date());
+		commande.setDateLivraison(new Date());
+		
+		
+		CommandeDao commandeDao= new CommandeDao(connexion.getSession());
+		commande.setNumCommande(17);
+	//	commandeDao.update(commande);
+		
+		//empDao.create(emp);
 
-		// session=connexion.getSession();
-		// session.beginTransaction();
+//		Dao articleDao = new ArticleDao(connexion);
+//		// employeDao.delete(emp);
+//		articleDao.update(article);
+//		List<Bean> articles = articleDao.listAll();
+//		
+//		for (Bean object : articles) {
+//			System.out.println(((Article) object).getLibelleArticle());
+//		}
+		Article article= new Article();
+		article.setIdArticle(2);
+		LigneCommande ligneCommande= new LigneCommande();
+		ligneCommande.setNumLigne(4);
+//		ligneCommande.setArticle(article);
+//		ligneCommande.setCommande(commande);
+//		ligneCommande.setQuantiteCommande(50);
+		LigneCommandeDao ligneCommandeDao= new LigneCommandeDao(connexion.getSession());
+		//ligneCommandeDao.create(ligneCommande);
+		//ligneCommandeDao.update(ligneCommande);
+		//ligneCommandeDao.delete(ligneCommande);
+		
+		Facture facture=new Facture();
+		//facture.setCommande(commande.getNumCommande());
+		//facture.setDateFacture(new Date());
+		//facture.setMontant((float)20.5);
+		
+		FactureDao factureDao= new FactureDao(connexion.getSession());
+		
+		facture.setNumFacture(5);
+//		facture.setCommande(commande);
+//		facture.setMontant((float)40.5);
+//		facture.setDateFacture(new Date());
+//		//factureDao.create(facture);
+		//factureDao.delete(facture);
+//		
+		FamilleArticle familleArticle= new FamilleArticle();
+		familleArticle.setNomFamille("jdidaaa");
+		FamilleArticleDao familleArticleDao= new FamilleArticleDao(connexion.getSession());
+	//familleArticle.setIdFamille(20);
+		//familleArticleDao.create(familleArticle);
+		familleArticleDao.create(familleArticle);
 
-		// Client client = new Client();
-		//
-		// client.setNomClient("louay");
-		// client.setTelClient(222222);
-		// client.setVilleClient("sfax");
-		// client.setAdresseClient("route de gremda");
-		//
-		// session.save(client);
-
-		FamilleArticle famille = new FamilleArticle();
-
-		famille.setNomFamille("informatique");
-
-		session = connexion.getSession();
-		session.beginTransaction();
-		session.save(famille);
-		session.getTransaction().commit();
-		// session.getTransaction().commit();
-		Article article = new Article();
-		article.setLibelleArticle("Article 1");
-		article.setPrixHtArticle(15);
-		article.setQuantiteArticle(3);
-		article.setReferenceArticle(1516);
-		article.setTvaArticle(15);
-		article.setFamilleArticle(famille);
-
-		// session.save(article);
-
-		/*
-		 * Commande commande = new Commande();
-		 * 
-		 * commande.setDateCommande(new Date()); commande.setDateLivraison(new
-		 * Date()); commande.setClient(client);
-		 * 
-		 * session.save(commande);
-		 * 
-		 * LigneCommande ligne=new LigneCommande();
-		 * 
-		 * ligne.setQuantiteCommande(20); ligne.setArticle(article);
-		 * ligne.setCommande(commande);
-		 * 
-		 * session.save(ligne);
-		 * 
-		 * 
-		 * Employe emp= new Employe(); emp.setAdresseEmploye("Sfax");
-		 * emp.setCinEmploye(8884097); emp.setLoginEmploye("louay");
-		 * emp.setMpEmploye("louay"); emp.setNomEmploye("louay");
-		 * emp.setPrenomEmploye("abd");
-		 * 
-		 * session.save(emp);
-		 */
-		ArticleDao articleDao = new ArticleDao(connexion);
-		// System.out.println("Result ========>"+articleDao.update("louay",
-		// 1515, 50, 50, 50, famille));
-		// System.out.println("Result ========>"+articleDao.delete(1515));
-		// System.out.println("Result ========>"+articleDao.create(article));
-		List<Article> articles = articleDao.listAll();
-		for (Article article1 : articles) {
-			System.out.println(article.getLibelleArticle());
-
-		}
-		/*
-		 * Client client = new Client();
-		 * 
-		 * client.setNomClient("louay"); client.setTelClient(222222);
-		 * client.setVilleClient("sfax");
-		 * client.setAdresseClient("route de gremda");
-		 * 
-		 * session.save(client);
-		 * 
-		 * Commande commande = new Commande();
-		 * 
-		 * commande.setDateCommande(new Date()); commande.setDateLivraison(new
-		 * Date()); commande.setClient(client);
-		 * 
-		 * session.save(commande);
-		 * 
-		 * Facture facture= new Facture(); facture.setDateFacture(new Date());
-		 * facture.setMontant(Float.parseFloat("2.5"));
-		 * facture.setCommande(commande);
-		 * 
-		 * session.save(facture);
-		 */
-
-		Query req = session.createQuery("from FamilleArticle");
-
-		// req.setInteger(0, 7);
-		List<FamilleArticle> list = (List<FamilleArticle>) req.list();
-		for (FamilleArticle famille1 : list) {
-			System.out.println(famille1.getNomFamille());
-		}
-		// session.getTransaction().commit();
-		HibernateSessionManager.shutdown();
-		// connexion.closeHibernateConnexion();
+		
+		connexion.closeHibernateConnexion();
+		
 	}
 
 }
